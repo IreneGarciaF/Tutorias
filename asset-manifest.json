@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/Pergolas/static/css/main.2cc1fdce.css",
-    "main.js": "/Pergolas/static/js/main.6a3af6d1.js",
-    "static/js/453.2c4feed0.chunk.js": "/Pergolas/static/js/453.2c4feed0.chunk.js",
-    "static/media/plantas.png": "/Pergolas/static/media/plantas.83c05416e6326328a7f6.png",
-    "static/media/token3.png": "/Pergolas/static/media/token3.459f6bbef9a53ab0d040.png",
-    "static/media/agenda.png": "/Pergolas/static/media/agenda.57777aa2e4bf3b2eace6.png",
-    "static/media/token2.png": "/Pergolas/static/media/token2.aa3136f23a8fa0c8740a.png",
-    "static/media/logo.png": "/Pergolas/static/media/logo.943d4b8c6c6b5625a2de.png",
-    "static/media/logoByN.png": "/Pergolas/static/media/logoByN.afac001b73b18a014e12.png",
-    "static/media/token1.png": "/Pergolas/static/media/token1.641dea4756d82ed2586b.png",
-    "static/media/logo2.png": "/Pergolas/static/media/logo2.96d84fec311dca7a9532.png",
-    "index.html": "/Pergolas/index.html",
-    "main.2cc1fdce.css.map": "/Pergolas/static/css/main.2cc1fdce.css.map",
-    "main.6a3af6d1.js.map": "/Pergolas/static/js/main.6a3af6d1.js.map",
-    "453.2c4feed0.chunk.js.map": "/Pergolas/static/js/453.2c4feed0.chunk.js.map"
+    "main.css": "/Tutorias/static/css/main.2cc1fdce.css",
+    "main.js": "/Tutorias/static/js/main.49ff92ca.js",
+    "static/js/453.2c4feed0.chunk.js": "/Tutorias/static/js/453.2c4feed0.chunk.js",
+    "static/media/plantas.png": "/Tutorias/static/media/plantas.83c05416e6326328a7f6.png",
+    "static/media/token3.png": "/Tutorias/static/media/token3.459f6bbef9a53ab0d040.png",
+    "static/media/agenda.png": "/Tutorias/static/media/agenda.57777aa2e4bf3b2eace6.png",
+    "static/media/token2.png": "/Tutorias/static/media/token2.aa3136f23a8fa0c8740a.png",
+    "static/media/logo.png": "/Tutorias/static/media/logo.943d4b8c6c6b5625a2de.png",
+    "static/media/logoByN.png": "/Tutorias/static/media/logoByN.afac001b73b18a014e12.png",
+    "static/media/token1.png": "/Tutorias/static/media/token1.641dea4756d82ed2586b.png",
+    "static/media/logo2.png": "/Tutorias/static/media/logo2.96d84fec311dca7a9532.png",
+    "index.html": "/Tutorias/index.html",
+    "main.2cc1fdce.css.map": "/Tutorias/static/css/main.2cc1fdce.css.map",
+    "main.49ff92ca.js.map": "/Tutorias/static/js/main.49ff92ca.js.map",
+    "453.2c4feed0.chunk.js.map": "/Tutorias/static/js/453.2c4feed0.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.2cc1fdce.css",
-    "static/js/main.6a3af6d1.js"
+    "static/js/main.49ff92ca.js"
   ]
 }
