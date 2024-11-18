@@ -1,7 +1,7 @@
 {
   "name": "gestion-tutorias",
   "version": "0.1.0",
-  "homepage": "https://irenegarciaf.github.io/Pergolas/",
+  "homepage": "https://irenegarciaf.github.io/Tutorias/",
   "private": true,
   "dependencies": {
     "@fullcalendar/core": "^6.1.15",
