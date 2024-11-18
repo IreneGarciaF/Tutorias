@@ -1,0 +1,67 @@
+.contenedor-calendario {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 80%;
+    height: 80%;
+    margin: 3% 10%;
+}
+
+.fc-day-grid-container {
+    background-color: #f7f7f7; 
+}
+
+.fc-day {
+    background-color: #fafafa; 
+}
+
+.fc-event .disponible-event {
+    background-color: #86d295; 
+    color: white;  
+    padding: 10px;  
+    border-radius: 8px; 
+    white-space: normal; 
+    word-wrap: break-word;
+}
+
+.fc-event .tutoria-event {
+    background-color: #45b8ac; 
+    cursor:default;   
+    color: white;  
+    padding: 10px;  
+    border-radius: 8px; 
+    white-space: normal; 
+    word-wrap: break-word;
+    text-overflow: ellipsis;
+}
+
+
+.fc-event .disponible-event:hover {
+    background-color: #45b8ac; 
+    cursor: pointer; 
+}
+
+
+.fc-event .fc-event-title {
+    font-size: 18px;
+    font-weight: 400; 
+}
+
+.fc-day-today {
+    background-color: #0474ba5b !important; 
+    color: white;  
+    font-weight: bold;  
+}
+
+.fc-day-today.fc-saturday, 
+.fc-day-today.fc-sunday {
+    background-color: #ff9d0098 !important; 
+}
+
+.fc-toolbar-title {
+    font-weight: bold; 
+    color: #134c8f; 
+    text-transform: uppercase;
+}
+

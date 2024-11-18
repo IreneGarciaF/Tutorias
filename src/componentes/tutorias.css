@@ -1,0 +1,29 @@
+.contenedor-tutorias {
+    border: 2px solid  #b6e1f9;
+    background-color: #b6e1f9;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.contenedor-tutorias h1 {
+    font-size: 40px;
+    font-weight: 800;
+    color: #134c8f; 
+    text-transform: uppercase;
+    text-shadow: 3px 3px 0 #c1c5c8;
+}
+
+@media (max-width: 1500px) {
+    .contenedor-tutorias {
+        min-height: 95vh;
+    }
+}
+
+@media (max-width: 600px) {
+    .contenedor-tutorias h1 {
+        font-size: 30px;
+    }
+}

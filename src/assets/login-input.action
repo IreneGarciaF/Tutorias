@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=2.0">
+<meta name="genio-extension" content="enabled">
+<title>
+	Club UNIVERSAE</title>
+<link rel="shortcut icon" href="https://static.colectivosvip.com/public/colectivos/2514/favicon-1681899491700.png" type="image/vnd.microsoft.icon"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-migrate-3.3.1.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/i18n/jquery.ui.datepicker-es.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@7/swiper-bundle.min.js"></script>
+<script src="https://club.universae.com/v004/js/common.js"></script>
+<script src="https://club.universae.com/v004/js/jquery.initialize.min.js"></script>
+<script src="https://club.universae.com/v004/js/jquery.widgets.js"></script>
+<script type="text/javascript" src="localize-file-resource.action?resourceKey=jquery.widgets.i18n.js"></script>
+<script src="https://club.universae.com/v004/js/jquery.plugins.js"></script>
+<script type="text/javascript" src="localize-file-resource.action?resourceKey=jquery.plugins.i18n.js"></script>
+<script src="https://club.universae.com/v004/js/jquery.initial.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/4.3.2/iframeResizer.contentWindow.min.js"></script>
+<link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/themes/smoothness/jquery-ui.css" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@7/swiper-bundle.min.css"/>
+<link href="https://static.colectivosvip.com/public/colectivos/2514/themes/less/1730092976858/portal.css" rel="stylesheet"/>
+<script type="text/javascript">
+    const googleTagManagerEnabled = false;
+</script>
+
+<!-- Google Analytics 4 -->
+	<script async src='https://www.googletagmanager.com/gtag/js?id=G-LEL51V4T86'></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		
+		function gtag(){
+			dataLayer.push(arguments);
+		}
+		
+	    gtag("consent", "default", {
+	    	'ad_storage': "denied",
+	    	'analytics_storage': "denied",
+	        'wait_for_update': 2000 // milliseconds
+	    });
+	    
+	    dataLayer.push({
+	   	  'event': 'default_consent'
+	   	});
+	</script>
+	<!-- End Google Analytics 4 -->
+<!-- Google Analytics -->
+<script>
+function cookiesGA(saveCookies){
+	
+	if (saveCookies) {
+		
+			gtag('consent', 'update', {
+			  'ad_storage': 'granted',
+			  'analytics_storage': 'granted',
+			});
+		
+			gtag('js', new Date());
+			
+			gtag('config', 'G-LEL51V4T86');
+			
+			gtag('event', 'page_view');
+		
+		// Como lo cargaremos a false previamente, en el momento que habiliten las volvemos a incluir. Necesario el remove
+	} 
+}
+</script>
+<!-- End Google Analytics -->
+<script type="text/javascript">
+	var $CV = window.$CV || {};
+	
+	$CV.env = {};
+	$CV.env.device = {
+		app: false,
+		appIOS: false,
+		webView: false
+	};
+	$CV.env.portal = {
+		countries: "ES".toLowerCase().split(','),
+		entryPoint: "https://club.universae.com/"
+	};
+
+	var $wgts = window.$wgts || {};
+	$wgts.entryPoint = $CV.env.portal.entryPoint;
+</script><script type="text/javascript">
+	$(function() {
+		// Override de propiedades de accordion.
+		$.extend( $.ui.accordion.prototype.options, {
+			icons: false,
+			animate: false,
+			collapsible: true,
+			active: false,
+			heightStyle: "content"
+		} );
+		// Override de propiedades de dialog.
+		$.extend( $.ui.dialog.prototype.options, {
+			closeText: "Aceptar",
+			draggable: false,
+			resizable: false,
+			modal: true,
+			width: 'auto',
+			height: 'auto',
+			autoOpen: false
+		} );
+		$( "[data-role='tabs']" ).tabs();
+		$( "[data-role='accordion']" ).accordion();
+		$( "[data-accessible]" ).simulateClickOnEnter();
+		$( "[data-menu-target]" ).click(function(e) {
+			var targetElem;
+			targetElem = $( this ).attr( "data-menu-target" ) ;
+			sessionStorage['menu-target']= targetElem;
+		});
+		$.initialize( "img[src='']:not(.noinitials)", function() {
+			$( this ).initialsAvatar();
+		});
+		$.initialize( ".alert", function() {
+			$( this ).alert();
+		});
+		$.initialize( ".remaining-chars", function() {
+			$( this ).remainingchars();
+		});
+		
+		jQuery.ajaxPrefilter(function(s) {
+		    if (s.crossDomain) {
+		        s.contents.script = false;
+		    }
+		});
+		$(document.body).addClass('page-no-user');
+		
+		if (window.parent != window.self){
+			window.parent.postMessage('scroll', '*');
+			$(document.body).addClass('page-iframe');
+		}
+	});
+	
+	function initjs(saveCookies){
+		cookiesGA(saveCookies);
+	}
+</script><script src="https://www.google.com/recaptcha/api.js?hl=es"></script>
+<script>
+	$(function() {
+		$("#field-username").select().focus();
+		$("#toggle-password").togglePassword();
+	});
+	
+	function onSubmit( token ) {
+		$( "#loginForm" ).submit();
+	}
+</script>
+</head>
+<body class="page page-form page-register">
+	
+
+
+
+<div id="header">
+	<div id="header-content">
+		
+			<div class="wgt-header-links">
+				
+				
+				<a class="link link-support-request" href="https://club.universae.com/support-request-input.action"><span class="icon"></span>Atención al usuario</a>
+				<a class="link link-help" href="https://club.universae.com/help-home.action"><span class="icon"></span>Ayuda</a>
+				
+			</div>
+			
+			
+				<div class="wgt-header-no-user">
+					<a class="link link-register" href="https://club.universae.com/register-input.action"><span class="icon"></span>Acceder</a>
+					
+						<a class="link link-register" href="https://club.universae.com/create-account-input.action"><span class="icon"></span>Crear una cuenta</a>
+					
+					
+				</div>
+			
+			
+		
+		<a href="https://club.universae.com/" data-menu-target="li-menu-home">
+			
+			<img class="logo" src="https://static.colectivosvip.com/public/colectivos/2514/logo-1681899491682.png" alt="Home Club UNIVERSAE" border="0"/>
+		</a>
+		<div class="wgt-accounts-container">
+			
+			
+		</div>
+		
+				
+	</div>
+</div><div id="container">
+		<div id="content-wrapper">
+			<div id="content">
+				<h2>
+					<span style="color: #ffffff">Tu portal de ventajas como miembro del <strong>CLUB UNIVERSAE</strong></span></h2>
+				<div class="register-box-wrapper">
+					<div class="box-register">
+						<h3>Iniciar sesión</h3>						
+						<form class="form" id="loginForm" method="POST" action="register.action">
+								<div class="form-input">
+									<label for="field-username">Email<span aria-hidden="true">*</span></label>
+									<input type="text" id="field-username" name="username" value="" autocomplete="off" aria-required="true" aria-invalid="false" aria-describedby="field-username-error"/>
+									</div>
+								<div class="form-input position-relative">
+									<label for="field-password">Contraseña*</label>
+									<input type="password" id="field-password" name="password" maxlength="45" autocomplete="new-password"/>
+									<i tabindex="0" id="toggle-password" class="icon icon-eye" data-accessible=""></i>
+									</div>
+								<div class="form-checkbox">
+							       		<input id="field-remember-me" name="rememberMe" type="checkbox" value="true" checked/>
+							        	<label for="field-remember-me">Recuérdame en este ordenador</label>
+							        </div>
+								<div class="button-group group-register">
+									<button class="button button-default g-recaptcha" data-sitekey="6LclSy8pAAAAAGUfvc_vYSfxLGaz2uiQf3GgDGRh" data-callback="onSubmit" data-action="register">Acceder</button>
+									<a class="button button-link margin-top-20" href="https://club.universae.com/password-recovery-input.action">¿Has olvidado tu contraseña?</a>
+									</div>
+								<input type="hidden" name="struts.token.name" value="token" />
+<input type="hidden" name="token" value="144LSB4F0ZAP2TCECEPDEE3AL1S3HO1B" /></form>
+						</div>
+					<div class="box-wrapper"> 
+						<div class="box-recover-password" style="display: none;">
+							<h3>¿Eres nuevo en Club UNIVERSAE? Solicita tu contraseña introduciendo tu correo electrónico.</h3>
+							<form class="form" method="post" action="password-recovery.action">
+								<div class="form-input">
+									<label for="field-username-recovery">Email*</label>
+									<input id="field-username-recovery" name="username" type="text" value=""/>
+								</div>
+								<div class="button-group">
+									<input type="submit" class="button button-white" value="Enviar"/>
+								</div>
+								<input type="hidden" name="struts.token.name" value="token" />
+<input type="hidden" name="token" value="144LSB4F0ZAP2TCECEPDEE3AL1S3HO1B" /></form>
+						</div>
+						<div class="box-create-account">
+								<h3>¿Eres nuevo en <strong>Club UNIVERSAE</strong>?</h3>
+								<div class="button-group">
+									<a href="https://club.universae.com/create-account-input.action" class="button button-white">Crear una cuenta</a>
+								</div>
+							</div>
+						</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+
+<div id="footer">
+	<div class="footer-widgets">
+		<div class="wgt-links">
+			<a class="link link-privacy-policy" href="https://club.universae.com/privacy-policy.action"><span class="icon"></span>Política de privacidad</a>
+			<a class="link link-cookies-policy" href="https://club.universae.com/cookie-policy.action"><span class="icon"></span>Política de cookies</a>
+			<a class="link link-terms-use" href="https://club.universae.com/terms-of-use.action"><span class="icon"></span>Condiciones de uso</a>
+			<span class="link link-powered-by">Powered by<a href="https://vipdistrict.com/?utm_source=VD_Portal&utm_medium=Footer&utm_campaign=vd_portal" target="_blank" rel="noopener" aria-label="Vip District web corporativa"><span class="logo"></span></a></span>
+		</div>
+		
+	</div>
+	<div class="footer-inner">
+		
+		
+		
+			<p class="footer-text">
+				Copyright © 2010-2024 Vip District S.L. &bull; Todos los derechos reservados<br/>Vip District • ES • IT • PT • DE • FR • NL
+			</p>
+		
+	</div>
+	
+	
+		<script src="https://static.colectivosvip.com/public/js/cookieconsent-3.1.1.min.js" data-cfasync="false"></script>
+		<script>
+			window.cookieconsent.initialise({
+				revokable: false,
+				cookie: {
+					name: 'COOKIES_POLICY_NEW', 
+					secure: true
+				},
+				type: "opt-out",
+				content: {
+					message: "VIP DISTRICT, SL utiliza cookies propias y de terceros con la finalidad de facilitar tu experiencia en nuestra web y analizar tu navegaci\u00F3n con fines estad\u00EDsticos y anal\u00EDticos. Si deseas rechazar las cookies de anal\u00EDtica pulsa sobre \'Rechazar cookies\' y si quieres aceptarlas, pulsa sobre el bot\u00F3n \'Aceptar Cookies\'.",
+				  	allow: "Aceptar cookies",
+					deny: "Rechazar cookies",
+					link: "Saber m\u00E1s",
+					href: "https://club.universae.com/cookie-policy.action",	
+				},
+				onPopupOpen: function() {
+					initjs(false);
+				},
+				onStatusChange: function(status, chosenBefore) {
+					initjs(this.hasConsented());					
+				},
+				onInitialise: function (status) {
+					initjs(this.hasConsented());
+				}
+			});	
+		</script>
+	
+</div>
+<script>
+	$(function() {
+		guiFixFooter();
+		$(window).load(function() {
+			guiFixFooter();
+		});
+		$(window).resize(function() {
+			guiFixFooter();
+		});
+		// Monitorizamos cambios en la altura del body.
+		onBodyHeightChange(function() {
+			guiFixFooter();
+		});
+		
+		$(".drop-trigger").on( "click", function ( event ) {
+			$( this ).toggleClass( "active" );
+			$( $( this ).data( "target" ) ).toggleClass( "active" );
+			event.stopPropagation();
+		} );
+		$( ".drop-trigger" ).keydown( function( e ) {
+			if ( e.key == "Enter" || e.key == " " ) {
+				$( this ).click();
+				e.preventDefault();
+			} else if ( e.keyCode == 38 ) {
+				if ( $( "#dropdown1" ).is( ":visible" ) ) {
+					$( "#dropdown1" ).find( ":focusable" ).last().focus();
+				} else {
+					$( this ).click();
+				}
+				e.preventDefault();
+			} else if ( e.keyCode == 9 && e.shiftKey && $( "#dropdown1" ).is( ":visible" ) ) {
+				$( this ).click();
+				//e.preventDefault();
+			}
+		} );
+		$( "#dropdown1 a" ).keydown( function( e ) {
+			const lastChild = $( this ).parent().is( ":last-child" );
+			if ( e.keyCode == 40 ) {
+				if ( lastChild ) {
+					// Enfocamos al padre.
+					$( ".drop-trigger" ).focus();
+				} else {
+					$( this ).closest( "li" ).next().find( "a" ).focus();
+				}
+				e.preventDefault();
+			} else if ( e.keyCode == 38 ) {
+				$( this ).closest( "li" ).prev().find( "a" ).focus();
+				e.preventDefault();
+			} else if ( e.keyCode == 9 && !e.shiftKey && lastChild ) {
+				$( this ).closest( ".drop" ).find( ".drop-trigger" ).click();
+			}
+		} );
+		
+		$( window ).click( function() {
+			$( ".drop-down" ).removeClass( "active" );
+			$( ".drop-trigger" ).removeClass( "active" );
+		});
+	});
+
+	function guiFixFooter() {
+	    if ($("#footer").hasClass("fixed-bottom")) {
+	    	if ($(document.body).height() >= $(document).height() - $("#footer").height()) {
+	    		$("#footer").removeClass("fixed-bottom");	
+	    	}
+	    } else {
+	    	// No tengo fixed-bottom, por lo tanto el body me contiene.
+		    if ($(document.body).height() + 15 < $(document).height()) {
+				$("#footer").addClass("fixed-bottom");
+		    }
+	    }
+	}
+</script>
+</body>
+</html>

@@ -1,0 +1,153 @@
+.seccion-tienda {
+    display: flex;
+}
+
+.img1-tienda {
+    width: 15vh;
+}
+
+.img2-tienda {
+    width: 20vh;
+}
+
+.img3-tienda {
+    width: 20vh;
+}
+
+/* Columna productos */
+.col1-tienda {
+    width: 100%;
+    border-top: 3px solid #b6e1f9;
+    background: linear-gradient(0deg, rgba(69,184,172,0.9) 0%, rgba(19,76,143,0.9) 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center ;    
+}
+
+.objetos-carrito {
+    padding: 5% 0;
+    color: #f7f7f7;
+}
+
+.objetos-carrito h4 {
+    font-size: 22px;
+    font-weight: 500;
+    margin: 0;
+}
+
+.objetos-carrito h5 {
+    font-size: 16px;
+    font-weight: 300;
+    margin-top: 0; 
+    margin-bottom: 7%;
+}
+
+.tienda-btn {
+    background: linear-gradient(0deg, rgba(19,76,143,1) 0%, rgba(45,126,221,1) 100%);
+    color: #f7f7f7;
+    border: none;
+    border-radius: 6px;
+    height: 4vh; 
+    width: 70%;
+    cursor: pointer; 
+    margin-bottom: 35%;
+}
+
+.tienda-btn:hover {
+    background: #134c8f; 
+    border: 2px solid #134c8f; 
+}
+
+/* Columna formulario */
+
+.col2-tienda {
+    background-color: #b6e1f9;
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    padding: 3% 8%;
+}
+
+.cabecera-tienda h3{
+    font-size: 35px;
+    font-weight: 300;
+    color: #134c8f;
+}
+
+.cabecera-tienda h4 {
+    font-size: 24px;
+    font-weight: 500;
+    color: #134c8f;
+}
+
+.cabecera-tienda li {
+    font-size: 20px;
+    font-weight: 300;
+    color: #134c8f;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+@media (max-width: 1500px) {
+    *{
+        margin: 0 !important;
+        padding: 0 !important;
+        box-sizing: border-box;
+    }
+
+    .col1-tienda {
+        width: 70%;
+    }
+    .img1-tienda {
+        margin-top: 15% !important;
+    }
+    
+    .img2-tienda {
+        margin-top: 10% !important;
+    }
+    
+    .img3-tienda {
+        margin-top: 10% !important;
+    }
+     .tienda-btn {
+        margin: 8% 0 !important;
+     }
+
+     .col2-tienda {
+        padding-left: 5% !important;
+        padding-top: 10% !important;
+     }   
+
+}
+@media (max-width: 500px) {
+    .seccion-tienda {
+        min-height: 85vh;
+    }
+
+    .img1-tienda {
+        width: 10vh;
+    }
+    
+    .img2-tienda {
+        width: 13vh;
+    }
+    
+    .img3-tienda {
+        width: 13vh;
+    }
+    .col2-tienda {
+        padding-left: 2% !important;
+    }
+    .cabecera-tienda h3{
+        font-size: 28px;
+    }
+    .cabecera-tienda h4 {
+        font-size: 20px;
+    }
+    
+    .cabecera-tienda li {
+        font-size: 16px;
+    }
+}

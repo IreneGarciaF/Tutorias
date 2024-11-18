@@ -1,0 +1,100 @@
+.pasarela-pago {
+    background-color: #b6e1f9;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.pasarela-pago h2 {
+    font-size: 35px;
+    font-weight: 300;
+    color: #134c8f;
+}
+
+.pasarela-pago .form-label {
+    display: flex;
+    flex-direction: column;
+    font-size: 20px;
+    font-weight: 500;
+    color: #134c8f;
+    text-align: left;
+}
+
+.pasarela-pago .form-control {
+    width: 50%; 
+    height: 1vh;
+    margin: auto;
+    margin-bottom: 2%;
+    border-radius: 6px;
+    padding: 2%;
+    border: 1px solid #134c8f;
+    font-size: 14px;
+    
+}
+
+.pasarela-pago .form-control:focus {
+    outline: 2px solid #0473ba; 
+    outline: invert;
+    box-shadow: none; 
+}
+
+.pasarela-btn {
+    background: linear-gradient(0deg, rgba(19,76,143,1) 0%, rgba(45,126,221,1) 100%);
+    color: #f7f7f7;
+    border: none;
+    border-radius: 6px;
+    height: 4vh; 
+    width: 20%;
+    cursor: pointer; 
+    margin: 6% 10%;
+}
+
+.pasarela-btn:hover {
+    background: #134c8f; 
+    border: 2px solid #134c8f; 
+}
+
+@media (max-width: 1500px) {
+    .pasarela-pago .form-control {
+        width: 50%; 
+        height: 4vh;
+        margin-bottom: 2% !important;  
+        padding: 1% 2% !important;      
+    }
+    .pasarela-pago h2 {
+        margin: 2% 0 !important;
+    }
+}
+
+@media (max-width: 990px) {
+    .pasarela-pago .form-control {
+        width: 70%;        
+    }
+    
+}
+
+@media (max-width: 650px) {
+    .pasarela-pago .form-control {
+        width: 80%;    
+    }
+    .pasarela-btn {
+        width: 35%;
+    }
+    
+}
+@media (max-width: 450px) {
+    .pasarela-pago .form-control {
+        width: 90%;    
+    }
+
+    .pasarela-pago h2 {
+        font-size: 24px;
+    }
+    .pasarela-pago .form-label {
+        font-size: 16px;
+    }
+    .pasarela-btn {
+        width: 40%;
+    }
+    
+}

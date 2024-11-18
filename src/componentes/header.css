@@ -1,0 +1,146 @@
+.cabecera {
+    background-color: #134c8f;
+    display: flex;
+    align-items: center; 
+    justify-content: space-between;
+    padding: 1%;
+}
+
+
+.logo-img {
+    margin: 2vh 7vh; 
+    height: 6vh; 
+    width: auto; 
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    width: 30%;
+}
+.usuario-header {
+    width: 100%;
+}
+
+.unicoins-header {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    width: 100%;
+}
+
+.nombre-header h6 {
+    font-size: 20px;
+    font-weight: 300;
+    color: #b6e1f9;
+    margin: 0;
+    padding-bottom: 4%;
+}
+
+.unicoins-header p{
+    margin: 0;
+}
+
+.logoByN{
+    height: 3vh;
+    width: auto;
+    padding: 0 1%;
+}
+
+.navegacion {
+    display: flex;
+    align-items: center; 
+}
+
+.header-links {
+    display: flex; 
+    list-style: none;
+    align-items: center;
+    padding: 0;
+    margin: 0; 
+}
+
+.header-link {
+    margin: 0 2vh; 
+    color: white; 
+    text-decoration: none;
+}
+
+.header-link:hover {
+    text-decoration: underline;
+}
+
+
+
+@media (max-width: 1500px) {
+    *{
+        margin: 0 !important;
+        padding: 0 !important;
+        box-sizing: border-box;
+    }
+
+    .cabecera {
+        padding: 2% !important;
+    }
+    
+    .nombre-header {
+        padding-left: 6% !important;   
+    }
+
+    .unicoins-header {
+        padding-left: 6% !important;
+
+    }
+    .header-link {
+        margin: 0 1vh !important;
+    }
+
+}
+
+@media (max-width: 1200px) {
+    .logo-container {
+        width: 40%;
+    }
+    .usuario-header {
+        margin-left: 3% !important;
+    }
+}
+
+@media (max-width: 800px) {
+
+    .header-links {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
+    .logo-container {
+        width: 50%;
+    }
+    .nombre-header h6 {
+        font-size: 18px;
+    }
+    .unicoins-header {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 450px) {
+    .cabecera {
+        display: flex;
+        align-items: flex-start; 
+        flex-direction: column;
+        flex-wrap: wrap;
+        padding: 5% !important;
+    }
+    .unicoins-header {
+        width: fit-content;
+        margin-left: 5% !important;
+    }
+    .logo-container {
+        width: 100%;
+    }
+    .usuario-header {
+        margin-left: 2%;
+    }
+
+}
