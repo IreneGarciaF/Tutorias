@@ -2,16 +2,21 @@ import {Container, Button, Col, ListGroup, Dropdown, Card} from 'react-bootstrap
 import  { useState, useEffect } from 'react';
 import './usuario.css'
 import { BsChevronDoubleDown,  BsChevronDoubleUp } from "react-icons/bs";
+import { getFirestore, collection, getDocs } from 'firebase/firestore';
+import { getAuth } from 'firebase/auth';
 
 // imagen
-
 import agenda from '../assets/agenda.png'
 
 
-function Usuario({ userAppointments }) {
+const db = getFirestore();
+const auth = getAuth();
+
+
+function Usuario() {
 
     {/* Para el desplegable de citas */}
-
+    const [userAppointments, setUserAppointments] = useState([]);
     const [historialCitasPasadas, setHistorialCitasPasadas] = useState([]);
     const [historialCitasFuturas, setHistorialCitasFuturas] = useState([]);
     const [showHistory, setShowHistory] = useState(false); 
@@ -30,31 +35,62 @@ function Usuario({ userAppointments }) {
         setShowHistory(!showHistory); 
     };
 
+    useEffect(() => {
+      const fetchCitas = async () => {
+        try {
+          const currentUser = auth.currentUser;
+          if (!currentUser) {
+            console.error ("El usuario no está autenticado");
+            return;
+          }
+          
+          const collectionCitas = collection(db, 'citas');
+          const querySnapshot = await getDocs(collectionCitas);
+
+          const citaData = querySnapshot.docs
+            .map(doc => ({ id: doc.id, ...doc.data() }))
+            .filter(cita => cita.userUid === currentUser.uid)
+            .map(cita => ({
+             ...cita,
+             date: cita.date?.toDate ? cita.date.toDate() : new Date(),
+          }));
+
+        console.log("fetchCitas superada");
+        setUserAppointments(citaData)
+        } catch (error) {
+          console.error("Error al cargar las citas:", error);
+        }
+      }
+      fetchCitas();
+    }, []); 
+
 
     useEffect(() => {
         console.log('userAppointments:', userAppointments); 
+
         if (userAppointments && Array.isArray(userAppointments)) {
           // Filtrar las citas pasadas
           const citasPasadas = userAppointments.filter(appointment => {
-            return new Date(appointment.start).getTime() < Date.now();
+          const today = new Date();
+            return appointment.date.getTime() <= today.getTime();  
           });
           setHistorialCitasPasadas(citasPasadas);
     
           // Filtrar las citas futuras
           const citasFuturas = userAppointments.filter(appointment => {
-            return new Date(appointment.start).getTime() >= Date.now();
+            const today = new Date();
+              return appointment.date.getTime() > today.getTime();
           });
           setHistorialCitasFuturas(citasFuturas);
         }
       }, [userAppointments]);
 
-      {/* Para la tarjeta de próxima cita */}
-      const citasFuturas = userAppointments.filter(appointment => 
-        new Date(appointment.start).getTime() >= Date.now()
-      );
+      // Para la tarjeta de próxima cita
+      const proximaCita = historialCitasFuturas.sort((a, b) => a.date - b.date)[0];
 
-      const proximaCita = citasFuturas.sort((a, b) => new Date(a.start) - new Date(b.start))[0];
-    
+      
+      console.log("se hacargado la proxima cita", proximaCita)
+
   return (
     <Container fluid className="seccion-usuario">
         <Col xs={6} md={6} className="col1-usuario">
@@ -90,8 +126,8 @@ function Usuario({ userAppointments }) {
                     {historialCitasFuturas.map(appointment => (
                       <ListGroup.Item key={appointment.id}>
                         <p>
-                        {`Cita para el ${new Date(appointment.start).toLocaleString()}`}
-                        </p>
+                        {`Cita para el ${new Date(appointment.date).toLocaleString()}`}
+                          </p>
                       </ListGroup.Item>
                     ))}
                   </ListGroup>
@@ -106,8 +142,8 @@ function Usuario({ userAppointments }) {
                     {historialCitasPasadas.map(appointment => (
                       <ListGroup.Item key={appointment.id}>
                         <p>
-                        {`Cita para el ${new Date(appointment.start).toLocaleString()}`}
-                        </p>
+                        {`Cita para el ${new Date(appointment.date).toLocaleString()}`}
+                          </p>
                       </ListGroup.Item>
                     ))}
                   </ListGroup>
@@ -131,12 +167,12 @@ function Usuario({ userAppointments }) {
                     <Card.Title>Tu próxima tutoría</Card.Title>
 
                     {proximaCita ? (
-                        <Card.Subtitle className="subtitulo-cita">
-                            {new Date(proximaCita.start).toLocaleString()}
-                        </Card.Subtitle>
-                        ) : (
-                        <Card.Subtitle className="subtitulo-cita">No tienes tutorías próximas</Card.Subtitle>
-                        )}
+                      <Card.Subtitle className="subtitulo-cita">
+                        {new Date(proximaCita.date).toLocaleString()}
+                      </Card.Subtitle>
+                    ) : (
+                      <Card.Subtitle className="subtitulo-cita">No tienes tutorías próximas</Card.Subtitle>
+                    )}
 
                     <Card.Text>
                     Hemos creado una sala de Zoom para tu próxima tutoría, podrás acceder a ella 5 minutos antes de que comience, a través del siguiente enlace: 

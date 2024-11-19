@@ -94,6 +94,7 @@ const Calendar = () => {
                     const querySnapshot = await getDocs(q);
                     
                     const userEvents = querySnapshot.docs.map(doc => {
+                        console.log(doc.data())
                         const eventDate = doc.data().date.toDate();
                         const timeString = eventDate.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
 
