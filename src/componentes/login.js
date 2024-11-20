@@ -1,20 +1,24 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {Container, Col, Button, Form, } from 'react-bootstrap/';
 import { Link, useNavigate } from 'react-router-dom';
 import './login.css'
 
+
 //base de datos
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getFirestore, doc, getDoc } from 'firebase/firestore';
 
 // imagenes
 import plantas from '../assets/plantas.png'
 import logo2 from '../assets/logo2.png'
 
 
+
 function Login() {
   
-  const [email, setEmail] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [rol, setRol] = useState(null);
     const navigate = useNavigate(); 
 
     const handleSubmit = async (e) => {
@@ -26,7 +30,21 @@ function Login() {
             await signInWithEmailAndPassword(auth, email, password);
             alert('Inicio de sesión exitoso');
 
-            // Redirigir a otra página tras el inicio de sesión
+            const user = auth.currentUser;
+            if (user) {
+                const db = getFirestore();
+                const userRef = doc(db, 'usuarios', user.uid);
+                const userDoc = await getDoc(userRef);
+
+                if (userDoc.exist()){
+                    const userData = userDoc.Data();
+                    setRol(userData.role)
+                } else {
+                    console.error("No se encontró el rol del usuario");
+                }
+            }
+
+
             navigate('/tutorias'); 
         } catch (error) {
             const errorMessage = error.message;
@@ -34,6 +52,12 @@ function Login() {
             alert(`Error: ${errorMessage}`);
         }
     };
+
+    useEffect(() => {
+        if (rol !== null) {  
+          console.log('Rol actualizado:', rol);
+        }
+      }, [rol]);
 
   return (
     <Container fluid className="seccion-login">
