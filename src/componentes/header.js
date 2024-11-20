@@ -32,20 +32,24 @@ function Header() {
                   <h6>Hola, {currentUser.displayName}!</h6>
               ) : (
                   <h6>Bienvenido, invitado!</h6>
-              )}
+              )} 
             </Container>
+            {role === 'user' && ( 
             <Container className="unicoins-header">
                 <img className="logoByN" src={logoByN} alt="LogoByN"  ></img>
                 <p>Tus tokens: {tokens} </p>
             </Container>
+            )}
          </Container> 
         </div>
         <Navbar.Collapse className="navegacion" id="basic-navbar-nav">          
             <Nav className="header-links">       
-              <Link className="header-link" to="/" > Inicio </Link>
+              {role === null && <Link className="header-link" to="/" > Inicio </Link>}
+              {role === null && <Link className="header-link" to="/register" > Registro </Link>}
+              {role === null && <Link className="header-link" to="/login" > Login </Link>}
               {role === 'user' && <Link className="header-link" to="/catalogo" > Catálogo </Link>}
               {role === 'user' && <Link className="header-link" to="/tienda"> Tienda </Link>}
-              <Link className="header-link" to="/tutorias"> Calendario </Link>
+              {role === 'user' && <Link className="header-link" to="/tutorias"> Calendario </Link>}
 
               {role === 'admin' && <Link className="header-link" to="/admin">Panel de Administrador</Link>}
               
