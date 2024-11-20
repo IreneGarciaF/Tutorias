@@ -49,7 +49,7 @@ function Header() {
               {role === null && <Link className="header-link" to="/login" > Login </Link>}
               {role === 'user' && <Link className="header-link" to="/catalogo" > Catálogo </Link>}
               {role === 'user' && <Link className="header-link" to="/tienda"> Tienda </Link>}
-              {role === 'user' && <Link className="header-link" to="/tutorias"> Calendario </Link>}
+              {role === 'user' || role === 'admin' && <Link className="header-link" to="/tutorias"> Calendario </Link>}
 
               {role === 'admin' && <Link className="header-link" to="/admin">Panel de Administrador</Link>}
               
