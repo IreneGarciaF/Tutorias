@@ -36,7 +36,7 @@ function Login() {
                 const userRef = doc(db, 'usuarios', user.uid);
                 const userDoc = await getDoc(userRef);
 
-                if (userDoc.exist()){
+                if (userDoc.exists()){
                     const userData = userDoc.Data();
                     setRol(userData.role)
                 } else {
