@@ -37,7 +37,7 @@ function Login() {
                 const userDoc = await getDoc(userRef);
 
                 if (userDoc.exists()){
-                    const userData = userDoc.Data();
+                    const userData = userDoc.data();
                     setRol(userData.role)
                 } else {
                     console.error("No se encontró el rol del usuario");
