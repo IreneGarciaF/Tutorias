@@ -1,12 +1,13 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Button, Form, Container, Card, Col } from 'react-bootstrap';
 import { db } from './utilidades/firebase';
-import { collection, addDoc, Timestamp, doc, getDoc, where, orderBy, query, getDocs } from 'firebase/firestore'; // Importación correcta de la API modular
+import { collection, addDoc, Timestamp, doc, getDoc, where, orderBy, query, getDocs, updateDoc } from 'firebase/firestore'; 
 import { LoginContext } from './utilidades/LoginContext';
 import './adminPanel.css';
 
-//imagen
+//imagen y alert
 import agenda from '../assets/agenda.png'
+import Swal from 'sweetalert2'
 
 const AdminPanel = () => {
   const [selectedDate, setSelectedDate] = useState(null);
@@ -27,27 +28,65 @@ const AdminPanel = () => {
     const userDoc = await getDoc(userRef); 
 
     if (userDoc.exists() && userDoc.data().role === 'admin') {
-      const dateTime = new Date(`${selectedDate}T${selectedTime}`);
-      dateTime.setMilliseconds(0);
+      const dateString = `${selectedDate} ${selectedTime}`;
 
-      const citaDisponible = {
-        date: Timestamp.fromDate(dateTime),
-        available: true,
-        adminName: adminName,
-        adminUid: currentUser.uid,
-      };
+      console.log("Fecha formateada: ", dateString);
 
-      try {
-        await addDoc(collection(db, 'horarios_disponibles'), citaDisponible);
-        setMensaje("Horario guardado con éxito");
-      } catch (error) {
-        console.error("Error al guardar el horario: ", error);
-        setMensaje("Hubo un error al guardar el horario");
+      const hoy = new Date();
+      const citaDate = new Date(dateString)
+
+      if (citaDate < hoy) {
+        Swal.fire({
+          position: "center",
+          icon: "alert",
+          title: "No se pueden crear horarios en el pasado",
+          showConfirmButton: false,
+          timer: 2000
+        });
+       return;
       }
-    } else {
-      setMensaje("No tienes permisos para establecer horarios.");
-    }
-  };
+      
+      try {
+          // Para no duplicar citas
+        const citasRef = collection(db, 'horarios_disponibles');
+        const q = query(citasRef, where("dateString", "==", dateString));
+        const querySnapshot = await getDocs(q);
+        
+        if (!querySnapshot.empty) {
+          Swal.fire({
+            position: "center",
+            icon: "alert",
+            title: "Ya existe una cita en esa fecha y hora",
+            showConfirmButton: false,
+            timer: 2000
+          });
+        }else {
+
+          const dateTime =new Date(dateString);
+          const citaDisponible = {
+            date: Timestamp.fromDate(dateTime),
+            available: true,
+            adminName: adminName,
+            adminUid: currentUser.uid,
+            dateString: dateString, 
+          };
+          const horarioRef = await addDoc(collection(db, 'horarios_disponibles'), citaDisponible);
+          const horarioId = horarioRef.id;
+          await updateDoc(horarioRef, {
+            horarioId: horarioId, 
+          });
+
+          setMensaje("Horario guardado con éxito");
+          
+        }
+      } catch (error) {
+            console.error("Error al guardar el horario: ", error);
+            setMensaje("Hubo un error al guardar el horario");
+      }
+      } else {
+        setMensaje("No tienes permisos para establecer horarios.");
+      }
+    };
 
   const fetchProximaTutoria = async () => {
     try {
@@ -81,7 +120,6 @@ const AdminPanel = () => {
       fetchProximaTutoria();
     }
   }, [currentUser]);
-
  
 
   return (

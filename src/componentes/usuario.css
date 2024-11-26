@@ -57,6 +57,21 @@
     align-items: center;
 }
 
+.citas-futuras {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.citas-futuras .list-group-item {
+    display: flex; 
+    justify-content: space-between;
+    align-items: center; 
+    width: 100%; 
+    padding: 10px; 
+}
+
 .dropdown-menu h5 {
     font-size: 22px;
     font-weight: 500;
@@ -73,6 +88,18 @@
     width: 40vh;
     height: auto;
     margin: 0;
+}
+
+.eliminar-cita {
+    width: 30%;
+    height: auto;
+    margin: 0% 5%;
+    padding: 2%;
+    background: linear-gradient(0deg, rgba(19,76,143,1) 0%, rgba(45,126,221,1) 100%);
+    color: #f7f7f7;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
 }
 
 .proxima-cita {
@@ -113,6 +140,16 @@
     font-weight: 500;
 }
 
+.salaZoom {
+    background: linear-gradient(0deg, rgba(19,76,143,1) 0%, rgba(45,126,221,1) 100%);
+    color: #f7f7f7;
+    border: none;
+    border-radius: 6px;
+    height: 4vh; 
+    width: 20%;
+    cursor: pointer; 
+    margin: 6% 10%;
+}
 
 @media (max-width: 1500px) {
     *{
@@ -147,17 +184,36 @@
     .proxima-cita .card-text {
         padding: 3% 0 !important;
     }
+    .eliminar-cita {
+        margin: 0% 5% !important;
+        padding: 2%!important;
+    }
 }
 
 @media (max-width: 1100px) {
     .col1-usuario {
         width: 70%;
     }
+    .citas-futuras .list-group-item {
+        flex-direction: column; 
+        align-items: flex-start; 
+    }
+    .eliminar-cita {
+        width: 50%;
+        height: auto;
+        margin: 5% 5% !important;
+        padding: 2%!important;
+    }
+    
 }
 
 @media (max-width: 950px) {
     .proxima-cita {
         width: 100%;
+    }
+    .eliminar-cita {
+        width: 100%;
+        height: auto;
     }
 }
 
@@ -199,6 +255,10 @@
     
     .proxima-cita .card-link {
         font-size: 16px;
+    }
+    .eliminar-cita {
+        width: 80%;
+        height: auto;
     }
     
 }

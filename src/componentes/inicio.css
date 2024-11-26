@@ -108,13 +108,14 @@
     }
 }
 
-@media (max-width: 1500px) {
+@media (max-width: 1200px) {
     .col1-header {
         width: 40%;
     }
     .recuadro-header p {
         font-size: 30px;
     }
+    
 }
 
 @media (max-width: 991px) {

@@ -5,6 +5,7 @@ import { useCarrito } from './CarritoContext';
 import { db } from './firebase';
 import { updateDoc, doc } from 'firebase/firestore';
 import './FormularioPagos.css'
+import Swal from 'sweetalert2'
 
 const FormularioPagos = () => {
     const { currentUser, tokens, setTokens } = useContext(LoginContext); 
@@ -32,7 +33,13 @@ const FormularioPagos = () => {
           });
 
           setTokens(newTokens);
-          alert ('Compra realizada con éxito. Has recibido ' + totalTokens + ' tokens')
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: 'Compra realizada con éxito. Has recibido ' + totalTokens + ' tokens',
+            confirmButtonText: "Ok",
+            confirmButtonColor: "#0473ba",
+          });
 
            // Limpiar el carrito y el formulario
            limpiarCarrito();
@@ -43,7 +50,13 @@ const FormularioPagos = () => {
 
         } catch (error) {
           console.error("Error al procesar el pago: ", error)
-          alert ('Hubo un error al procesar el pago');
+          Swal.fire({
+            position: "center",
+            icon: "error",
+            title: "Hubo un error al procesar el pago.",
+            showConfirmButton: false,
+            timer: 2000
+          });
         }
     };
 

@@ -9,9 +9,10 @@ import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase
 import { setDoc, doc } from 'firebase/firestore';
 
 
-//imagenes
+//imagenes y alert
 import plantas from '../assets/plantas.png'
 import logo2 from '../assets/logo2.png'
+import Swal from 'sweetalert2'
 
 function Register() {
 
@@ -53,7 +54,13 @@ function Register() {
         }, { merge: true });
           
 
-        alert('Usuario registrado con éxito');
+        Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Te has registrado con éxito. Ya puedes iniciar sesión.",
+            confirmButtonText: "Ok",
+            confirmButtonColor: "#0473ba",
+          });
         setEmail('');
         setPassword('');
         setNombre ('');

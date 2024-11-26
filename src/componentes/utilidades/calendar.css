@@ -64,4 +64,34 @@
     color: #134c8f; 
     text-transform: uppercase;
 }
+ 
 
+@media (max-width: 1200px) {
+    .swal2-popup {
+        width: 80% !important; 
+        max-width: 500px !important; 
+        padding: 20px !important; 
+    }
+    .swal2-icon {
+        display: none !important;  
+    }
+
+    .swal2-title {
+        font-size: 20px !important;
+        text-align: center !important;
+    }
+
+    .swal2-content {
+        font-size: 16px !important;
+        text-align: center !important;
+    }
+    .swal2-confirm {
+        width: 30%;
+        height: auto;
+        margin: 2% !important;
+    }
+    .swal2-cancel {
+        width: 30%;
+        margin: 2% !important;
+    }
+}

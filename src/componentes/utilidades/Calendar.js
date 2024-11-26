@@ -7,19 +7,24 @@ import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import './calendar.css'
+import Swal from 'sweetalert2'
 
 //base de datos y demás
 import { LoginContext } from './LoginContext';
 import { db } from './firebase';
-import { collection, addDoc, query, where, getDocs, doc, updateDoc, Timestamp, getDoc } from 'firebase/firestore';
+import { collection, addDoc, query, where, getDocs, doc, updateDoc, Timestamp, getDoc, deleteDoc } from 'firebase/firestore';
 
 const Calendar = () => {
-    const { currentUser, tokens, setTokens } = useContext(LoginContext);
+    const { currentUser, tokens, setTokens, role } = useContext(LoginContext);
     const [ events, setEvents ] = useState([]);
     const [userEvents, setUserEvents] = useState ([]);
     const [adminEvents, setAdminEvents] = useState ([]);
     const [loading, setLoading] = useState(true);
     
+    useEffect(() => {
+        console.log("currentUser:", currentUser); 
+        console.log("Rol de usuario:", role); 
+      }, [currentUser, role]);
 
     useEffect(() => {
         if (!currentUser) {
@@ -117,24 +122,125 @@ const Calendar = () => {
     }, [currentUser.uid]);
 
 
+    const handleAdminClick = async (info) => {
+        const event = info.event;
+        const selectedDate = event.start;
+        
+        if (role !== 'admin') {
+            Swal.fire({
+                position: "center",
+                icon: "error",
+                title: "Solo los administradores pueden eliminar horarios.",
+                showConfirmButton: false,
+                timer: 2000
+              });
+            return;
+        }
+
+        const eliminarHorario = window.confirm(`¿Estás seguro que quieres eliminar el horario disponible el ${selectedDate.toLocaleString()}?`);
+        if (eliminarHorario) {
+            try {
+                const citaRef = doc(db, 'horarios_disponibles', event.id);
+                const citaDoc = await getDoc(citaRef);
+
+                if (citaDoc.exists() && citaDoc.data().available) {
+                     await deleteDoc(citaRef);
+
+                setEvents(prevEvents => prevEvents.filter(e => e.id !== event.id));
+                Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: "Horario eliminado con éxito",
+                    showConfirmButton: false,
+                    timer: 2000
+                  });
+        } else {
+            Swal.fire({
+                position: "center",
+                icon: "error",
+                title: "Esta cita ya no está disponible",
+                showConfirmButton: false,
+                timer: 2000
+              });
+        }
+        }catch (error) {
+        console.error("Error al eliminar el horario: ", error);
+        Swal.fire({
+            position: "center",
+            icon: "error",
+            title: "Hubo un error al eliminar el horario.",
+            showConfirmButton: false,
+            timer: 2000
+          });
+        }
+     }
+    };
+    
+
 
     const handleEventClick = async (info) => {
         const event = info.event;
         const selectedDate = event.start;
-        const selectedTime = event.start.toLocaleTimeString();
+        const selectedTime = selectedDate.toLocaleTimeString();;
+
+        
+        const hoy = new Date();
+        
+        if (selectedDate < hoy) {
+            Swal.fire({
+                position: "center",
+                icon: "warning",
+                title: "No puedes reservar citas en horarios ya pasados. Por favor, selecciona otro.",
+                showConfirmButton: false,
+                timer: 2000
+              });
+            return;
+            }
+
+
+        if (currentUser.role === 'admin') {
+            handleAdminClick(info);
+            return;
+        } else {
+        
 
         if (!event.extendedProps.available) {
-            alert("Este horario ya ha sido reservado.");
+            Swal.fire({
+                position: "center",
+                icon: "warning",
+                title: "Este horario ya ha sido reservado.",
+                showConfirmButton: false,
+                timer: 2000
+              });
+            info.jsEvent.preventDefault();
             return;  
         }
 
         if (tokens <= 0) {
-            alert("No tienes tokens suficientes para reservar la cita.");
+            Swal.fire({
+                position: "center",
+                icon: "warning",
+                title: "No tienes tokens suficientes para reservar la cita.",
+                showConfirmButton: false,
+                timer: 2000
+              });
             return;
         }
 
-        const confirmarReserva = window.confirm(`¿Estás seguro que quieres reservar la cita el ${selectedDate.toLocaleString()}?`);
-        if (confirmarReserva) {
+
+        const confirmarReserva = async() => {
+            const result = await Swal.fire({
+                title: "Confirmación de reserva",
+                text: `¿Estás seguro que quieres reservar la cita el ${selectedDate.toLocaleString()}?`,
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#0473ba",
+                cancelButtonColor: "#ff9100",
+                confirmButtonText: "Confirmar",
+              })
+        
+        
+        if (result.isConfirmed) {
             try {
                 const citaRef = doc(db, 'horarios_disponibles', event.id);
                 const citaDoc = await getDoc(citaRef);
@@ -168,7 +274,8 @@ const Calendar = () => {
                         status: "reservada",
                         adminName: adminName, 
                         adminUid: adminUid, 
-                        title: `Tutoría a las ${timeString}}`
+                        title: `Tutoría a las ${timeString}`,
+                        horarioId: event.id 
                     });
 
                     const newUserEvent = {
@@ -181,16 +288,38 @@ const Calendar = () => {
 
                     setEvents(prevEvents => prevEvents.filter(event => event.id !== citaDoc.id));
 
-                    alert("Cita reservada con éxito");
+                    Swal.fire({
+                        title: "¡Cita reservada con éxito!",
+                        text: `Has reservado una cita para el ${selectedDate.toLocaleString()}.`,
+                        icon: "success",
+                        confirmButtonText: "Ok",
+                        confirmButtonColor: "#0473ba",
+                        
+                      });
                     
                 } else {
-                    alert("La cita ya no está disponible.");
+                    Swal.fire({
+                        title: "Error",
+                        text: "La cita ya no está disponible.",
+                        icon: "error",
+                        confirmButtonText: "Ok",
+                        confirmButtonColor: "#0473ba",
+                    });
                 }
             } catch (error) {
                 console.error("Error al reservar la cita:", error);
-                alert("Hubo un error al reservar la cita.");
-            }
+                Swal.fire({
+                    position: "center",
+                    icon: "error",
+                    title: "Hubo un error al reservar la cita.",
+                    showConfirmButton: false,
+                    timer: 2000
+                  });
+                }
         }
+        };
+        await confirmarReserva();
+    }
     };
 
     const renderEventContent = (eventInfo) => {
@@ -213,15 +342,19 @@ const Calendar = () => {
                  initialView="dayGridMonth"
                  events={allEvents} 
                  eventClick={(info) => {
-                     const event = info.event;
-                     if (!event.extendedProps.available) {
-                         info.jsEvent.preventDefault();
-                         alert("Este horario ya ha sido reservado.");
-                     } else {
-                         handleEventClick(info);
-                     }
-                 }}
-                 eventContent={renderEventContent}
+                    console.log("currentUser:", currentUser); 
+                    console.log("Rol de usuario:", currentUser.role);
+                    if (role === 'admin') {
+                        console.log("Ejecutando handleAdminClick");
+                        handleAdminClick(info);
+                        return;
+                      } else {
+                        console.log("Ejecutando handleEventClick");
+                        handleEventClick(info);
+                      }
+                      
+                }}
+                eventContent={renderEventContent}
             />
 
         </div>

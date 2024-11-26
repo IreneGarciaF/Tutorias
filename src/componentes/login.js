@@ -8,9 +8,10 @@ import './login.css'
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { getFirestore, doc, getDoc } from 'firebase/firestore';
 
-// imagenes
+// imagenes y alert
 import plantas from '../assets/plantas.png'
 import logo2 from '../assets/logo2.png'
+import Swal from 'sweetalert2'
 
 
 
@@ -28,7 +29,13 @@ function Login() {
 
         try {
             await signInWithEmailAndPassword(auth, email, password);
-            alert('Inicio de sesión exitoso');
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Has iniciado sesión con éxito",
+                showConfirmButton: false,
+                timer: 2500
+              });
 
             const user = auth.currentUser;
             if (user) {
