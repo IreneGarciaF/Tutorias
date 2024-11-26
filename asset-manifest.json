@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/Tutorias/static/css/main.2cc1fdce.css",
-    "main.js": "/Tutorias/static/js/main.1ba4ccf5.js",
+    "main.css": "/Tutorias/static/css/main.eac771ae.css",
+    "main.js": "/Tutorias/static/js/main.66987efc.js",
     "static/js/453.2c4feed0.chunk.js": "/Tutorias/static/js/453.2c4feed0.chunk.js",
     "static/media/plantas.png": "/Tutorias/static/media/plantas.83c05416e6326328a7f6.png",
     "static/media/token3.png": "/Tutorias/static/media/token3.459f6bbef9a53ab0d040.png",
@@ -12,12 +12,12 @@
     "static/media/token1.png": "/Tutorias/static/media/token1.641dea4756d82ed2586b.png",
     "static/media/logo2.png": "/Tutorias/static/media/logo2.96d84fec311dca7a9532.png",
     "index.html": "/Tutorias/index.html",
-    "main.2cc1fdce.css.map": "/Tutorias/static/css/main.2cc1fdce.css.map",
-    "main.1ba4ccf5.js.map": "/Tutorias/static/js/main.1ba4ccf5.js.map",
+    "main.eac771ae.css.map": "/Tutorias/static/css/main.eac771ae.css.map",
+    "main.66987efc.js.map": "/Tutorias/static/js/main.66987efc.js.map",
     "453.2c4feed0.chunk.js.map": "/Tutorias/static/js/453.2c4feed0.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.2cc1fdce.css",
-    "static/js/main.1ba4ccf5.js"
+    "static/css/main.eac771ae.css",
+    "static/js/main.66987efc.js"
   ]
 }
