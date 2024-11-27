@@ -3,34 +3,33 @@ import { useContext, useState, useEffect } from "react";
 import { LoginContext } from "./LoginContext";
 
 const ProtectedRoute = ({ element, adminRequired = false }) => {
-    const { currentUser, role } = useContext(LoginContext);
-    const [loading, setLoading] = useState(true);
+    const { currentUser, role, loading: authLoading } = useContext(LoginContext);
+    const [isReady, setIsReady] = useState(false);
 
     console.log('Current User en ProtectedRoute:', currentUser);
     console.log('Rol del usuario:', role); 
 
     useEffect(() => {
-    if (currentUser !== null && role !== null) {
-        setLoading(false); 
+        if (currentUser !== null && role !== null && !authLoading) {
+          setIsReady(true); // Asegúrate de que tanto el usuario como el rol están disponibles
+        }
+      }, [currentUser, role, authLoading]);
+    
+      if (authLoading || !isReady) {
+        return <div>Loading...</div>;  // Asegúrate de esperar hasta que todo esté listo
       }
-    }, [currentUser, role]);
-
-    if (loading) {
-        return <div>Loading...</div>; 
-      }    
-
-
-    if (adminRequired) {
+    
+      if (adminRequired) {
         if (!currentUser || role !== 'admin') {
-            return <Navigate to="/login" />;
+          return <Navigate to="/login" />;
         }
-    } else {
-            if (!currentUser) {
-            return <Navigate to="/login" />;
+      } else {
+        if (!currentUser) {
+          return <Navigate to="/login" />;
         }
-    }
-
-    return element;
-};
+      }
+    
+      return element;
+    };
 
 export default ProtectedRoute;
