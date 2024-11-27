@@ -43,16 +43,16 @@ function Login() {
                 const userRef = doc(db, 'usuarios', user.uid);
                 const userDoc = await getDoc(userRef);
 
-                if (userDoc.exists()){
+                if (userDoc.exists()) {
                     const userData = userDoc.data();
-                    setRol(userData.role)
-                } else {
+                    setRol(userData.role);
+                    console.log("Rol del usuario:", userData.role);
+                  } else {
                     console.error("No se encontró el rol del usuario");
+                  }
                 }
-            }
 
-
-            navigate('/tutorias'); 
+            navigate('/login'); 
         } catch (error) {
             const errorMessage = error.message;
             console.error("Error al iniciar sesión: ", errorMessage);
