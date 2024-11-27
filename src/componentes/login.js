@@ -52,7 +52,7 @@ function Login() {
                   }
                 }
 
-            navigate('/login'); 
+            navigate('/tutorias'); 
         } catch (error) {
             const errorMessage = error.message;
             console.error("Error al iniciar sesión: ", errorMessage);
