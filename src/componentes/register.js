@@ -39,7 +39,7 @@ function Register() {
         const userCredential = await createUserWithEmailAndPassword(auth, email, password); 
         const user = userCredential.user;
 
-        console.log(user);  // Verificar el objeto 'user'
+        console.log(user);
         console.log(user?.uid)
 
         await updateProfile(user, {displayName: nombre});
@@ -54,7 +54,7 @@ function Register() {
         }, { merge: true });
           
 
-        Swal.fire({
+        await Swal.fire({
             position: "center",
             icon: "success",
             title: "Te has registrado con éxito. Ya puedes iniciar sesión.",
