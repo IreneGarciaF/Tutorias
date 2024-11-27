@@ -3,29 +3,31 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { db } from "./firebase";
 import { doc, getDoc } from "firebase/firestore";
 
+// Creamos el contexto
 export const LoginContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [tokens, setTokens] = useState(0);
   const [role, setRole] = useState(null);
-  const [loading, setLoading] = useState(true);  // Estado de carga general
+  const [loading, setLoading] = useState(true);  // Estado de carga
   const auth = getAuth();
 
+  // Efecto para manejar el cambio de estado del usuario
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
         setCurrentUser(user);
 
         try {
-          // Recuperar datos del usuario desde Firestore
+          // Recuperamos datos del usuario desde Firestore
           const userRef = doc(db, "usuarios", user.uid);
           const userDoc = await getDoc(userRef);
 
           if (userDoc.exists()) {
             const userData = userDoc.data();
             setTokens(userData.tokens);
-            setRole(userData.role);
+            setRole(userData.role);  // Establecemos el rol del usuario
           } else {
             console.log("El documento del usuario no existe en la base de datos.");
           }
@@ -39,12 +41,13 @@ export const AuthProvider = ({ children }) => {
         setTokens(0);
       }
 
-      setLoading(false);
+      setLoading(false);  // Al terminar la carga
     });
 
-    return () => unsubscribe();
+    return () => unsubscribe();  // Limpiar el listener
   }, [auth]);
 
+  // Proveedor de contexto
   return (
     <LoginContext.Provider value={{ currentUser, tokens, setTokens, role, loading }}>
       {children}
